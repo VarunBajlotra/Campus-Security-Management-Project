@@ -4,14 +4,13 @@ const LocalStrategy = require('passport-local').Strategy
 const Users = require('./db').Users
 
 passport.use(new LocalStrategy( {
-        usernameField: 'username',
+        usernameField: 'idno',
         passwordField: 'password'
     }
     ,function(username,password,done){
-        console.log(username)
         Users.findOne({
             where:
-            {username:username}
+            {idno:username}
         }).then((user)=>{
             if(!user){
                 return done(null,false)

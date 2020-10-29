@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+</head>
+<body>
+    <a href="/personnel/profile">Back to Profile</a>
+    <h1>Update User Details</h1>
+    <form action="/personnel/updaterecord" method="POST">
+        ID No. : {{entry.idno}}<input type="text" name="idno" value="{{entry.idno}}" hidden><br><br>
+        Name : <input type="text" name="name" value="{{entry.name}}"><br><br>
+        Password : <input type="text" name="password" value="{{entry.password}}"><br><br>
+        Date Of Birth : <input type="date" name="dob" value="{{entry.dob}}"><br><br>
+        Email : <input type="text" name="email" value="{{entry.email}}"><br><br>
+        Phone No. : <input type="text" name="phone" value="{{entry.phone}}"><br><br>
+        Gender : <input type="text" name="gender" value="{{entry.gender}}"><br><br>
+        Type : 
+        <select name="type">
+            <option value="{{entry.type}}" hidden selected>{{entry.type}}</option>
+            <option value="personnel">Personnel</option>
+            <option value="student">Student</option>
+            <option value="staff">Staff</option>
+        </select><br><br>
+        <input type="submit" value="Update Details"> 
+    </form>
+</body>
+</html>
