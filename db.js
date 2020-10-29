@@ -37,6 +37,39 @@ const Users = database.define('users',{
     type:{
         type:Sequelize.STRING(15),
         allowNull:false
+    },
+    location:{
+        type:Sequelize.STRING(30),
+        allowNull:false
+    }
+})
+
+const Complaints = database.define('complaints',{
+    cidno:{
+        type:Sequelize.STRING(30),
+        allowNull:false
+    },
+    cname:{
+        type:Sequelize.STRING(40),
+        allowNull:false
+    },
+    location:{
+        type:Sequelize.STRING(100)
+    },
+    description:{
+        type:Sequelize.STRING(1000),
+        allowNull:false
+    },
+    time:{
+        type:Sequelize.STRING(40),
+        allowNull:false
+    },   
+    status:{
+        type:Sequelize.STRING(30),
+        allowNull:false
+    },
+    resolutiontime:{
+        type:Sequelize.STRING(40)
     }
 })
 
@@ -45,5 +78,5 @@ database.sync().then(()=>{
 })
 
 module.exports={
-    Users
+    Users,Complaints
 }

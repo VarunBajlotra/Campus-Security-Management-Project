@@ -1,7 +1,7 @@
 const express = require('express')
 const session = require('express-session')
 const passport = require('./passport')
-const Users = require('./db').Users
+const {Users,Complaints} = require('./db')
 
 const app = express()
 app.use(express.json())
@@ -23,18 +23,10 @@ app.get('/',(req,res)=>{
     res.render('../public/landing')
 })
 
-app.get('/hello',(req,res)=>{
-    console.log('Hello User')
-})
-
-app.post('/login',passport.authenticate('local',{
-        failureRedirect:'/'
-    }),(req,res)=>{
-    res.redirect('/'+req.user.type+'/profile')
-})
-
-app.use('/user',(require('./routes/user').route))
+app.use('/all',(require('./routes/all').route))
 app.use('/personnel',(require('./routes/personnel').route))
+app.use('/staff',(require('./routes/staff').route))
+app.use('/student',(require('./routes/student').route))
 
 
 app.listen(4422,()=>{

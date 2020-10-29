@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaints</title>
+</head>
+<body>
+    <a href="/personnel/profile">Back To Profile</a>
+    <h1>Pending Complaints</h1>
+    <table border=2 cellspacing="5" cellpadding="5">
+        <thead>
+            <th>Complaint No.</th>
+            <th>Complaintant's Id</th>
+            <th>Complaintant's Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Time of Reporting</th>
+            <th>Resolution Time</th>
+            <th>Mark As Resolved?</th>
+        </thead>
+        {{#each pending as |item|}}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.cidno}}</td>
+                <td>{{item.cname}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.time}}</td>
+                <td>{{item.resolutiontime}}</td>
+                <td>
+                    <form action="/personnel/resolvecomplaint" method="POST">
+                        <input type="text" name="id" value="{{item.id}}" hidden>
+                        <input type="submit" value="Mark As Resolved?">
+                    </form>
+                </td>
+            </tr>
+        {{/each}}
+    </table><br><br>
+    <h1>Resolved Complaints</h1>
+    <table border=2 cellspacing="5" cellpadding="5">
+        <thead>
+            <th>Complaint No.</th>
+            <th>Complaintant's Id</th>
+            <th>Complaintant's Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Time of Reporting</th>
+            <th>Resolution Time</th>
+        </thead>
+        {{#each resolved as |item|}}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.cidno}}</td>
+                <td>{{item.cname}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.time}}</td>
+                <td>{{item.resolutiontime}}</td>
+            </tr>
+        {{/each}}
+    </table>
+</body>
+</html>

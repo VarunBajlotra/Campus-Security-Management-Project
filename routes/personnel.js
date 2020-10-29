@@ -1,9 +1,8 @@
 const route = require('express').Router()
 const passport = require('passport')
-const Users = require('../db').Users
+const {Users,Complaints} = require('../db')
 
 route.get('/profile',(req,res)=>{
-    console.log('In profile')
     if(!req.user){
         return res.redirect('/')
     }
@@ -11,16 +10,6 @@ route.get('/profile',(req,res)=>{
         return res.redirect('/'+req.user.type+'/profile')
     }
     res.render('../public/personnel/profile',{
-        user:req.user
-    })
-})
-
-route.post('/profile',(req,res)=>{
-    console.log('In profile')
-    if(!req.user){
-        return res.redirect('/login')
-    }
-    res.render('../public/profile',{
         user:req.user
     })
 })
@@ -50,7 +39,8 @@ route.post('/adduser',(req,res)=>{
         email:req.body.email,
         phone:req.body.phone,
         gender:req.body.gender,
-        type:req.body.type
+        type:req.body.type,
+        location:'Outside Campus'
     }).then(()=>{
         res.redirect('/personnel/profile')
     }).catch((err)=>{
@@ -66,11 +56,19 @@ route.get('/viewdb',(req,res)=>{
     if(req.user.type!='personnel'){
         return res.redirect('/'+req.user.type+'/profile')
     }
+    entries1 = []
     Users.findAll({
-
+        where:{
+            location:'Inside Campus'
+        }
     }).then((entries)=>{
-        res.render('../public/personnel/viewdb',{
-            entries
+        entries1 = entries
+        Users.findAll({
+
+        }).then((entries2)=>{
+            res.render('../public/personnel/viewdb',{
+                entries1,entries2
+            })
         })
     })
 })
@@ -133,6 +131,43 @@ route.post('/deleterecord',(req,res)=>{
         }
     }).then(()=>{
         res.redirect('/personnel/viewdb')
+    })
+})
+
+route.get('/viewcomplaints',(req,res)=>{
+    if(!req.user){
+        return res.redirect('/')
+    }
+    if(req.user.type!='personnel'){
+        return res.redirect('/'+req.user.type+'/profile')
+    }
+    Complaints.findAll({
+        where:{
+            status:'Pending'
+        }
+    }).then((pending)=>{
+        Complaints.findAll({
+            where:{
+                status:'Resolved'
+            }
+        }).then((resolved)=>{
+            res.render('../public/personnel/viewcomplaints',{
+                pending,resolved
+            })
+        })
+    })
+})
+
+route.post('/resolvecomplaint',(req,res)=>{
+    Complaints.update({
+        resolutiontime:new Date().toLocaleString(),
+        status:'Resolved'
+    },{
+        where:{
+            id:req.body.id
+        }
+    }).then(()=>{
+        res.redirect('/personnel/viewcomplaints')
     })
 })
 

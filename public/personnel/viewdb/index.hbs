@@ -21,7 +21,7 @@
             <th>Update Details</th>
             <th>Delete User</th>
         </thead>
-        {{#each entries as |item|}}
+        {{#each entries2 as |item|}}
             <tr>
                 <td>{{item.idno}}</td>
                 <td>{{item.password}}</td>
@@ -43,6 +43,32 @@
                         <input type="submit" value="Delete User">
                     </form>
                 </td>
+            </tr>
+        {{/each}}
+    </table>
+    <br><br>
+    <h1>Users Inside Campus</h1>
+    <table border=2 cellspacing="5" cellpadding="5">
+        <thead>
+            <th>Id No.</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Type</th>
+        </thead>
+        {{#each entries1 as |item|}}
+            <tr>
+                <td>{{item.idno}}</td>
+                <td>{{item.password}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.dob}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.type}}</td>
             </tr>
         {{/each}}
     </table>
