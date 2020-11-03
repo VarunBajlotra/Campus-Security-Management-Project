@@ -25,10 +25,12 @@ const Users = database.define('users',{
         allowNull:false
     },
     email:{
-        type:Sequelize.STRING(50)
+        type:Sequelize.STRING(50),
+        allowNull:false
     },
     phone:{
-        type:Sequelize.STRING(50)
+        type:Sequelize.STRING(50),
+        allowNull:false
     },
     gender:{
         type:Sequelize.STRING(50),

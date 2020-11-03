@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hostel Gate</title>
+    <link rel="stylesheet" href="../../student/hostelentry/style.css">
 </head>
 <body>
-    <h1>Hostel</h1>
+    <a href="/student/profile">Back to Profile</a>
+    <h1 style="text-align: center;">Hostel Entry</h1>
+    <div class="contentarea">
+        <h1>
+            Capturing Photo for Gender Classification
+        </h1>
+        <div class="camera">
+            <video id="video">Video stream not available.</video>
+        </div>
+        <div><button id="startbutton">Take Photo</button></div>
+        <canvas id="canvas"></canvas>
+        <div class="output">
+            <img id="photo" alt="The screen capture will appear in this box.">
+        </div>
+        <div>
+            <button id="submitphoto" >Submit Photo</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../../student/hostelentry/script.js"></script>
 </body>
 </html>

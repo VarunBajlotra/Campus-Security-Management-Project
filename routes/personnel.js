@@ -1,6 +1,22 @@
 const route = require('express').Router()
 const passport = require('passport')
 const {Users,Complaints} = require('../db')
+const nodemailer = require('nodemailer')
+const unirest = require("unirest");
+
+const msg = unirest("POST", "https://www.fast2sms.com/dev/bulk");
+
+msg.headers({
+    "authorization": "WbM7xc63KHfjYelvOLhBATNmzEoUygr2QS941pqVD80tIaRwdXwfHq6tCMLu8hFg1PVoWBEzbsx07QTO"
+});
+
+let transport = nodemailer.createTransport({
+    service:'gmail',
+    auth: {
+       user: 'varunbajlotra@gmail.com',
+       pass: '17102000vb'
+    }
+});
 
 route.get('/profile',(req,res)=>{
     if(!req.user){
@@ -159,6 +175,9 @@ route.get('/viewcomplaints',(req,res)=>{
 })
 
 route.post('/resolvecomplaint',(req,res)=>{
+    if(!req.user){
+        return res.redirect('/')
+    }
     Complaints.update({
         resolutiontime:new Date().toLocaleString(),
         status:'Resolved'
@@ -166,8 +185,61 @@ route.post('/resolvecomplaint',(req,res)=>{
         where:{
             id:req.body.id
         }
-    }).then(()=>{
-        res.redirect('/personnel/viewcomplaints')
+    }).then((entry)=>{
+        console.log(entry)
+        Complaints.findOne({
+            where:{
+                id:req.body.id
+            }
+        }).then((entry1)=>{
+            Users.findOne({
+                where:{
+                    idno:entry1.dataValues.cidno
+                }
+            }).then((entry2)=>{
+                // const message = {
+                //     from: 'varunbajlotra@gmail.com',
+                //     to: entry2.dataValues.email,
+                //     subject: 'Complaint Resolved At Campus Security Portal',
+                //     text: 'You filed a complaint with the following details:\n'+
+                //           'Place : '+entry1.dataValues.location+'\n'+
+                //           'Description : '+entry1.dataValues.description+'\n'+
+                //           "Complainant's ID : "+entry1.dataValues.cidno+'\n'+
+                //           "Complainant's Name : "+entry1.dataValues.cname+'\n\n'+
+                //           'This is to inform you that your complaint has been resolved.'+'\n\n'+
+                //           'Regards\n'+
+                //           'Campus Security'
+                // };
+                // transport.sendMail(message, function(err, info) {
+                //     if (err) {
+                //       console.log(err)
+                //     } else {
+                //       console.log(info);
+                //     }
+                // });
+                // msg.form({
+                //     "sender_id": "CAMPUS SECURITY",
+                //     "message":'\nYou filed a complaint with the following details:\n'+
+                //               'Place : '+entry1.dataValues.location+'\n'+
+                //               'Description : '+entry1.dataValues.description+'\n'+
+                //               "Complainant's ID : "+entry1.dataValues.cidno+'\n'+
+                //               "Complainant's Name : "+entry1.dataValues.cname+'\n\n'+
+                //               'This is to inform you that your complaint has been resolved.'+'\n\n'+
+                //               'Regards\n'+
+                //               'Campus Security',
+                //     "language": "english",
+                //     "route": "p",
+                //     "numbers": entry2.dataValues.phone,
+                // })
+                // msg.end(function (res) {
+                //     if(res.error){
+                //         console.log(res.error)
+                //     }
+                //     console.log(res.body)
+                // })
+                res.redirect('/personnel/viewcomplaints')
+            })
+        })
     })
 })
 
