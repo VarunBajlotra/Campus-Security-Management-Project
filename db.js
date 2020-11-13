@@ -75,10 +75,28 @@ const Complaints = database.define('complaints',{
     }
 })
 
+const HostelLog = database.define('hostellog',{
+    idno:{
+        type:Sequelize.STRING(30),
+        allowNull:false
+    },
+    name:{
+        type:Sequelize.STRING(40),
+        allowNull:false
+    },
+    entrytime:{
+        type:Sequelize.STRING(40),
+        allowNull:false
+    },
+    predictedgender:{
+        type:Sequelize.STRING(40)
+    }
+})
+
 database.sync().then(()=>{
     console.log('DataBase Structure Ready!!')
 })
 
 module.exports={
-    Users,Complaints
+    Users,Complaints,HostelLog
 }

@@ -75,65 +75,43 @@
             clearphoto();
         }
     }
+
+    function downloadImage(url) {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET',url, true)
+        xhr.responseType = 'blob'
+        xhr.onload = function() {
+          var urlCreator = window.URL || window.webkitURL
+          var imageUrl = urlCreator.createObjectURL(this.response)
+          var tag = document.createElement('a')
+          tag.href = imageUrl
+          tag.target = '_blank'
+          tag.download = 'entryphoto.jpg'
+          document.body.appendChild(tag)
+          tag.click()
+          document.body.removeChild(tag)
+        }
+        xhr.onerror = err => {
+          alert('Failed to download picture');
+        }
+        xhr.send()
+    }
+
     $('#submitphoto').click(()=>{
         console.log('Submit Clicked')
-        const XHR = new XMLHttpRequest();
-        FD  = new FormData();
-
-
-        XHR.addEventListener( 'load', function(event) {
-            // alert( 'Yeah! Data sent and response loaded.' );
-        });
-        
-        XHR.addEventListener( 'error', function(event) {
-            alert( 'Oops! Something went wrong.' );
-        });
-        
-        XHR.open( 'POST', '/student/enterhostel' );
-        XHR.responseType = 'blob'
-        
-        XHR.setRequestHeader( 'Content-Type', 'multipart/form-data' );
-
-        var context = canvas.getContext('2d');
-        canvas.width = width;
-        canvas.height = height;
-        context.drawImage(photo, 0, 0, width, height);
-        var blob = new Blob(['abc123'], {type: 'text/plain'});
-        // canvas.toBlob((blob)=>{
-        //     console.log(blob)
-        //     // temp=blob
-        //     $.post('/student/enterhostel',{
-        //         msg:"helooooooooo",
-        //         blob:blob
-        //     })
-        //     // FD.append('msg','Message')
-        //     // XHR.send(FD)
-        //     // XHR.send(blob)
-        //     // XHR.send({
-        //     //     msg:"Message",
-        //     //     blob:blob
-        //     // })
-        // })
-        // console.log(blob)
-        // XHR.send(blob)
-        // console.log('Hello')
-        // console.log(temp)
-        // console.log(photo.src)
-        $.post('/student/enterhostel',{
-            url:photo.src,
-            msg:'Message'
-        },(res)=>{
-            console.log(res)
-            if(res=='male'){
-                alert("You are identified as a male! You can't enter the girls' hostel!!")
-            }
-            else if(res=='female'){
-                $.get('/student/hostelsuccess',(res)=>{
-                    console.log(res)
-                })
-                // alert("You are identified as a female. You can enter the girls' hostel.")
-            }
-        })
+        downloadImage(photo.src)
+        setTimeout(()=>{
+            $.get('/student/verifyentry',(res)=>{
+                console.log(res)
+                if(res=='male'){
+                    alert("You are identified as a male! You can't enter the girls' hostel!!")
+                }
+                else if(res=='female'){
+                    alert("You are identified as a female. You can enter the girls' hostel.")
+                    document.location.href='/student/hostelsuccess'
+                }
+            })
+        },1000)
     })
     window.addEventListener('load', startup, false);
 })();

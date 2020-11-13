@@ -1,6 +1,6 @@
 const route = require('express').Router()
 const passport = require('passport')
-const {Users,Complaints} = require('../db')
+const {Users,Complaints,HostelLog} = require('../db')
 const nodemailer = require('nodemailer')
 const unirest = require("unirest");
 
@@ -178,6 +178,9 @@ route.post('/resolvecomplaint',(req,res)=>{
     if(!req.user){
         return res.redirect('/')
     }
+    if(req.user.type!='personnel'){
+        return res.redirect('/'+req.user.type+'/profile')
+    }
     Complaints.update({
         resolutiontime:new Date().toLocaleString(),
         status:'Resolved'
@@ -197,26 +200,26 @@ route.post('/resolvecomplaint',(req,res)=>{
                     idno:entry1.dataValues.cidno
                 }
             }).then((entry2)=>{
-                // const message = {
-                //     from: 'varunbajlotra@gmail.com',
-                //     to: entry2.dataValues.email,
-                //     subject: 'Complaint Resolved At Campus Security Portal',
-                //     text: 'You filed a complaint with the following details:\n'+
-                //           'Place : '+entry1.dataValues.location+'\n'+
-                //           'Description : '+entry1.dataValues.description+'\n'+
-                //           "Complainant's ID : "+entry1.dataValues.cidno+'\n'+
-                //           "Complainant's Name : "+entry1.dataValues.cname+'\n\n'+
-                //           'This is to inform you that your complaint has been resolved.'+'\n\n'+
-                //           'Regards\n'+
-                //           'Campus Security'
-                // };
-                // transport.sendMail(message, function(err, info) {
-                //     if (err) {
-                //       console.log(err)
-                //     } else {
-                //       console.log(info);
-                //     }
-                // });
+                const message = {
+                    from: 'varunbajlotra@gmail.com',
+                    to: entry2.dataValues.email,
+                    subject: 'Complaint Resolved At Campus Security Portal',
+                    text: 'You filed a complaint with the following details:\n'+
+                          'Place : '+entry1.dataValues.location+'\n'+
+                          'Description : '+entry1.dataValues.description+'\n'+
+                          "Complainant's ID : "+entry1.dataValues.cidno+'\n'+
+                          "Complainant's Name : "+entry1.dataValues.cname+'\n\n'+
+                          'This is to inform you that your complaint has been resolved.'+'\n\n'+
+                          'Regards\n'+
+                          'Campus Security'
+                };
+                transport.sendMail(message, function(err, info) {
+                    if (err) {
+                      console.log(err)
+                    } else {
+                      console.log(info);
+                    }
+                });
                 // msg.form({
                 //     "sender_id": "CAMPUS SECURITY",
                 //     "message":'\nYou filed a complaint with the following details:\n'+
@@ -241,6 +244,34 @@ route.post('/resolvecomplaint',(req,res)=>{
             })
         })
     })
+})
+
+route.get('/viewhostellog',(req,res)=>{
+    if(!req.user){
+        return res.redirect('/')
+    }
+    if(req.user.type!='personnel'){
+        return res.redirect('/'+req.user.type+'/profile')
+    }
+    HostelLog.findAll({
+        where:{
+
+        }
+    }).then((hostellog)=>{
+        res.render('../public/personnel/hostellog',{
+            hostellog
+        })
+    })
+})
+
+route.get('/viewcctv',(req,res)=>{
+    if(!req.user){
+        return res.redirect('/')
+    }
+    if(req.user.type!='personnel'){
+        return res.redirect('/'+req.user.type+'/profile')
+    }
+    res.render('../public/personnel/cctv')
 })
 
 module.exports={

@@ -2,16 +2,6 @@ const express = require('express')
 const session = require('express-session')
 const passport = require('./passport')
 const {Users,Complaints} = require('./db')
-const nodemailer = require('nodemailer')
-
-let transport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
-    auth: {
-       user: 'a478c9cb9377b5',
-       pass: '41d910068c8c31'
-    }
-});
 
 const app = express()
 app.use(express.json({limit:'1mb'}))

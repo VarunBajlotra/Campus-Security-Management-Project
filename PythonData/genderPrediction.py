@@ -5,8 +5,8 @@ import imutils
 import sys
 import urllib.request as urll
 
-url = sys.argv[1]
-# print(url)
+# path = 'C:/Users/varun/Downloads/entryphoto.jpg'
+path = 'C:/Users/varun/OneDrive/Desktop/Campus-Security-Management-Project/public/personnel/hostellog/images/'+sys.argv[1]
 
 def url_to_image(url):
     resp = urll.urlopen(url)
@@ -15,6 +15,7 @@ def url_to_image(url):
     return image
 
 genderNet = cv2.dnn.readNetFromCaffe('./PythonData/deploy_gender.prototxt', './PythonData/gender_net.caffemodel')
+faceCascade = cv2.CascadeClassifier("./PythonData/haarcascade_frontalface_default.xml")
 
 def predict(img):
     MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
@@ -29,7 +30,19 @@ def predict(img):
     # return {'gender':gender, 'male':genderProbs[0][0], 'female':genderProbs[0][1]}
     return gender
 
-img = url_to_image(url)
-img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+img = cv2.imread(path)
+# img = url_to_image(url)
 
-print(str(predict(img)),end="")
+greyFrame = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
+faces = faceCascade.detectMultiScale(greyFrame,1.3,5)
+
+offset = 10
+x,y,w,h = faces[0]
+faceSection = img[y-offset:y+h+offset, x-offset:x+w+offset]
+
+faceSection = cv2.resize(faceSection,(100,100))
+plt.imshow(faceSection)
+plt.show()
+
+# gender = predict(faceSection)['gender']
+print(predict(faceSection),end="")
