@@ -47,6 +47,15 @@ route.post('/adduser',(req,res)=>{
     if(req.user.type!='personnel'){
         return res.redirect('/'+req.user.type+'/profile')
     }
+    ph = req.body.phone
+    if(ph.length!=10 || ph[0]<6){
+        return res.redirect('/personnel/adduser')
+    }
+    year = +(req.body.dob.substr(0,4))
+    console.log(year)
+    if(year<1960||year>2003){
+        return res.redirect('/personnel/adduser')
+    }
     Users.create({
         idno:req.body.idno,
         name:req.body.name,
@@ -113,6 +122,15 @@ route.post('/updaterecord',(req,res)=>{
     }
     if(req.user.type!='personnel'){
         return res.redirect('/'+req.user.type+'/profile')
+    }
+    ph = req.body.phone
+    if(ph.length!=10 || ph[0]<6){
+        return res.redirect('/personnel/updaterec')
+    }
+    year = +(req.body.dob.substr(0,4))
+    console.log(year)
+    if(year<1960||year>2003){
+        return res.redirect('/personnel/updaterec')
     }
     Users.update({
         name:req.body.name,

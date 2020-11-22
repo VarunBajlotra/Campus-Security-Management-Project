@@ -4,29 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update User</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <!-- Font Icon -->
+    <link rel="stylesheet" href="../../personnel/updaterecord/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../../personnel/updaterecord/css/style.css">
+    <style>
+        nav div ul li a{
+            color: white
+        }
+    </style>
 </head>
 <body>
-    <a href="/personnel/profile">Back to Profile</a>
-    <h1>Update User Details</h1>
-    <form action="/personnel/updaterecord" method="POST">
-        ID No. : {{entry.idno}}<input type="text" name="idno" value="{{entry.idno}}" hidden><br><br>
-        Name : <input type="text" name="name" value="{{entry.name}}"><br><br>
-        Password : <input type="text" name="password" value="{{entry.password}}"><br><br>
-        Date Of Birth : <input type="date" name="dob" value="{{entry.dob}}"><br><br>
-        Email : <input type="text" name="email" value="{{entry.email}}"><br><br>
-        Phone No. : <input type="text" name="phone" value="{{entry.phone}}"><br><br>
-        Gender : <input type="radio" name="gender" id="male" value="Male"><label for="male">Male</label>
-                 <input type="radio" name="gender" id="female" value="Female"><label for="female">Female</label><br><br>
-        Type : 
-        <select name="type">
-            <option value="{{entry.type}}" hidden selected>{{entry.type}}</option>
-            <option value="personnel">Personnel</option>
-            <option value="student">Student</option>
-            <option value="staff">Staff</option>
-        </select><br><br>
-        <input type="submit" value="Update Details"> 
-    </form>
+
+    <nav class="navbar navbar-expand-sm bg-dark fixed-top">
+        <a href="" class="navbar-brand" style="color:white">
+            <img src='../../images/icons8-air-force-commander-male-48.png' height="25">
+            Campus Security Management
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="/personnel/profile" class="nav-link active">
+                    Profile
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/personnel/adduser" class="nav-link active">
+                    Add User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/personnel/viewdb" class="nav-link active">
+                    User Database
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/personnel/viewcomplaints" class="nav-link active">
+                    Complaints
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/all/filecomplaint" class="nav-link active">
+                    File Complaint
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/personnel/viewhostellog" class="nav-link active">
+                    Hostel Entry Log
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/personnel/viewcctv" class="nav-link active">
+                    CCTV Feed
+                </a>
+            </li>
+            <li class="nav-item">
+                <span id="person" class="nav-link active" style="color:rgb(252, 249, 88)">
+                    Welcome, 
+                </span>
+            </li>
+            <li class="nav-item">
+                <a href="/all/logout" class="nav-link active">
+                    Log Out
+                </a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    <br>
+    <div class="main">
+
+        <div class="container">
+            <form action="/personnel/updaterecord" method="POST" class="appointment-form" id="appointment-form">
+                <h2>Update User Details</h2>
+                <div class="form-group-1" style="color: black;">
+                    <label for="idno">ID No.</label>
+                    <input type="text" name="idno" id="idno" value="{{entry.idno}}" required />
+
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="{{entry.name}}" required />
+
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" value="{{entry.password}}" required />
+
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" id="dob" value="{{entry.dob}}" required />
+
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" value="{{entry.email}}" required />
+
+                    <label for="phone">Phone No.</label>
+                    <input type="number" name="phone" id="phone" value="{{entry.phone}}" required />
+
+                    <div style="color: black;">
+                        Gender : &nbsp;&nbsp;<input type="radio" name="gender" id="male" value="Male" ><label for="male">&nbsp;&nbsp;Male</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="gender" id="female" value="Female"><label for="female">&nbsp;&nbsp;Female</label>
+                    </div>
+
+                    <div style="color: black;">
+                        <label for="type">Type</label>
+                        <select name="type" id="type">
+                            <option value="{{entry.type}}" hidden selected>{{entry.type}}</option>
+                            <option value="personnel">Personnel</option>
+                            <option value="student">Student</option>
+                            <option value="staff">Staff</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-submit">
+                    <input type="submit" name="submit" id="submit" class="submit" value="Update User" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- JS -->
+    <script src="../../personnel/updaterecord/vendor/jquery/jquery.min.js"></script>
+    <script src="../../personnel/updaterecord/js/main.js"></script>
     <script>
         if('{{entry.gender}}'=='Female'){
             $('#female').attr('checked','checked')
@@ -34,6 +139,12 @@
         else if('{{entry.gender}}'=='Male'){
             $('#male').attr('checked','checked')
         }
+        $(()=>{
+            $.get('/user',(res)=>{
+                console.log(res)
+                $('#person').append(res)
+            })
+        })
     </script>
 </body>
 </html>

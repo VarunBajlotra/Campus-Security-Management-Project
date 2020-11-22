@@ -4,6 +4,14 @@ body{
 	background:#c8c8c8;
 	font:600 16px/18px 'Open Sans',sans-serif;
 }
+
+body{
+    background-image: url('../images/login.png');
+    background-repeat: no-repeat;
+    background-size: cover;    
+    background-attachment: fixed;
+}
+
 *,:after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}

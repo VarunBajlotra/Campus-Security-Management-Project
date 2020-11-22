@@ -43,3 +43,7 @@
     font-family: Arial;
     text-align: center;
 }
+
+nav div ul li a{
+    color: white
+}

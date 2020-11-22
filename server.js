@@ -23,6 +23,13 @@ app.get('/',(req,res)=>{
     res.render('../public/landing')
 })
 
+app.get('/user',(req,res)=>{
+    if(!req.user){
+        return res.redirect('/')
+    }
+    res.send(req.user.name)
+})
+
 app.use('/all',(require('./routes/all').route))
 app.use('/personnel',(require('./routes/personnel').route))
 app.use('/staff',(require('./routes/staff').route))

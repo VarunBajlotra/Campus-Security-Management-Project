@@ -1,5 +1,10 @@
 (function() {
 
+    $.get('/user',(res)=>{
+        console.log(res)
+        $('#person').append(res)
+    })
+
     var width = 320;
     var height = 0;
 

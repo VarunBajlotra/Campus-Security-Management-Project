@@ -51,6 +51,7 @@ route.get('/filecomplaint',(req,res)=>{
     if(!req.user){
         return res.redirect('/')
     }
+    // res.sendFile(process.cwd()+'/public/filecomplaint/index.html')
     res.render('../public/filecomplaint')
 })
 
@@ -66,24 +67,24 @@ route.post('/filecomplaint',(req,res)=>{
         time:new Date().toLocaleString(),
         status:'Pending'
     }).then(()=>{
-        // const message = {
-        //     from: 'varunbajlotra@gmail.com',
-        //     to: req.user.email,
-        //     subject: 'Complaint Filed At Campus Security Portal',
-        //     text: 'We have received a complaint from ' + req.user.name + ' with ID No. : ' + req.user.idno + ' with the following details:\n'+
-        //           'Place : '+req.body.location+'\n'+
-        //           'Description : '+req.body.description+'\n\n'+
-        //           'We have started working on your complaint. We will get back to you soon.'+'\n\n'+
-        //           'Regards\n'+
-        //           'Campus Security'
-        // };
-        // transport.sendMail(message, function(err, info) {
-        //     if (err) {
-        //       console.log(err)
-        //     } else {
-        //       console.log(info);
-        //     }
-        // });
+        const message = {
+            from: 'varunbajlotra@gmail.com',
+            to: req.user.email,
+            subject: 'Complaint Filed At Campus Security Portal',
+            text: 'We have received a complaint from ' + req.user.name + ' with ID No. : ' + req.user.idno + ' with the following details:\n'+
+                  'Place : '+req.body.location+'\n'+
+                  'Description : '+req.body.description+'\n\n'+
+                  'We have started working on your complaint. We will get back to you soon.'+'\n\n'+
+                  'Regards\n'+
+                  'Campus Security'
+        };
+        transport.sendMail(message, function(err, info) {
+            if (err) {
+              console.log(err)
+            } else {
+              console.log(info);
+            }
+        });
         // msg.form({
         //     "sender_id": "CAMPUS SECURITY",
         //     "message":'\nWe have received a complaint from ' + req.user.name + ' with ID No. : ' + req.user.idno + ' with the following details:\n'+
