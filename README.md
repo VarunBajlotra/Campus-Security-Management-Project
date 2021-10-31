@@ -22,6 +22,7 @@ The project aims to make a reliable, highly secure software that is scalable, fl
   * The face is passed on to the pre trained Caffe Model (based on Convolutional Neural Networks) which gives the probability of the face belonging to MALE and FEMALE classes. 
   * If it belongs to the FEMALE class, entry is granted. Otherwise, authorities are notified.
 ![Gender Classification using Machine Learning](https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/3.png)
+<p align="center">Gender Classification using Machine Learning</p>
 
 ### 3. ENTRY TO RESTRICTED AREAS
 * Not everyone should be allowed to enter certain areas - Staff Rooms, Examination Department, Accounts Department, Cabins for professors, laboratories etc.
@@ -42,3 +43,18 @@ The project aims to make a reliable, highly secure software that is scalable, fl
 
 ## Conclusion
 The proposed project has been successfully completed well within the allocated time. Following are a few screenshots that depict the functioning of the various mentioned features.
+
+<p align="center">
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/1.png" width="450" />
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/2.png" width="500" />
+</p>
+<p align="center">The predicted gender is MALE, so entry is denied</p>
+
+<p align="center">
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/1.png" width="450" />
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/2.png" width="500" />
+</p>
+<div align="center">
+  <div width=50% display="inline-block">Registration of complaints</div>
+  <div width=50% display="inline-block">Pending Complaints</div>
+</div>
