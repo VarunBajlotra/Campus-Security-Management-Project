@@ -21,3 +21,24 @@ The project aims to make a reliable, highly secure software that is scalable, fl
   * Using a haar cascade face recognition algorithm, the face of the person is extracted. 
   * The face is passed on to the pre trained Caffe Model (based on Convolutional Neural Networks) which gives the probability of the face belonging to MALE and FEMALE classes. 
   * If it belongs to the FEMALE class, entry is granted. Otherwise, authorities are notified.
+![Gender Classification using Machine Learning](https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/3.png)
+
+### 3. ENTRY TO RESTRICTED AREAS
+* Not everyone should be allowed to enter certain areas - Staff Rooms, Examination Department, Accounts Department, Cabins for professors, laboratories etc.
+* Only staff members are allowed to enter these places
+* This is monitored using a similar login system.
+
+### 4. COMPLAINT MANAGEMENT SYSTEM
+* Any user can file a complaint to the security portal telling about their location and their complaint description. The user immediately receives an auto generated system EMail containing the details of his/her complaint.
+* Moreover, for ease in communication, the user is also promptly informed via an auto generated system SMS.
+* These complaints are received by the personnel and they process the complaints.
+* After a complaint is solved, the personnel have an option to mark it as resolved.
+* The user is straight away informed via both EMail and SMS that his/her complaint has been resolved.
+* The history of all the previous complaints can be viewed by the personnel.
+
+### 5. 24x7 CCTV SURVEILLANCE
+* The campus is monitored constantly by CCTV cameras to prevent any unfortunate accidents.
+* The personnel can access the footage anytime in one click.
+
+## Conclusion
+The proposed project has been successfully completed well within the allocated time. Following are a few screenshots that depict the functioning of the various mentioned features.
