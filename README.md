@@ -51,10 +51,25 @@ The proposed project has been successfully completed well within the allocated t
 <p align="center">The predicted gender is MALE, so entry is denied</p>
 
 <p align="center">
-  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/1.png" width="450" />
-  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/2.png" width="500" />
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/4.png" /> <br>
+  Registration of complaints
 </p>
-<div align="center">
-  <div width=50% display="inline-block">Registration of complaints</div>
-  <div width=50% display="inline-block">Pending Complaints</div>
-</div>
+<p align="center">
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/5.png" /> <br>
+  Pending Complaints
+</p>
+
+<p align="center">
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/6.png" /> <br>
+  System Generated Email
+</p>
+<p align="center">
+  <img src="https://github.com/VarunBajlotra/Campus-Security-Management-Project/blob/main/images/7.png" /> <br>
+  System Generated SMS
+</p>
+
+## IMPROVEMENT POSSIBILITIES AND FUTURE SCOPE
+1. The Entry Exit system currently requires the user to present credentials in the form of usernames and passwords. This process can sometimes be time-consuming, and even prone to attacks and security breaches. A BIOMETRIC SYSTEM can be deployed which would be more accurate and quicker.
+2. The project satisfactorily provides security within the premises of a campus. With some improvements, the system can be upscaled to provide the same features at a much larger scale - even an entire city like Delhi, Mumbai, Kolkata! 
+3. To ensure restricted entry to the staff-only, a FACE RECOGNITION SYSTEM can be deployed, which would ensure a highly secure system.
+
